@@ -40,7 +40,7 @@ public class StepListFragment extends Fragment {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     // only if it hasn't been added before
                     // (if we don't check this, then there will be two fragment instances added if the
-                    // device is rotated twice in a row)
+                    // user repeatedly clicks the StepListFragment)
                     if (fragmentManager.findFragmentByTag("step_details_fragment") == null) {
                         StepDetailsFragment fragment = new StepDetailsFragment();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
