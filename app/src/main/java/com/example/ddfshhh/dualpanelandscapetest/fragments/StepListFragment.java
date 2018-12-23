@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,10 +38,16 @@ public class StepListFragment extends Fragment {
                 // on tablets or phones (landscape mode), we load step details frag into the details pane
                 if (getActivity().findViewById(R.id.step_details_container) != null) {
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    StepDetailsFragment fragment = new StepDetailsFragment();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.step_details_container, fragment, "step_details_fragment");
-                    fragmentTransaction.commit();
+                    // only if it hasn't been added before
+                    // (if we don't check this, then there will be two fragment instances added if the
+                    // device is rotated twice in a row)
+                    if (fragmentManager.findFragmentByTag("step_details_fragment") == null) {
+                        StepDetailsFragment fragment = new StepDetailsFragment();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.add(R.id.step_details_container, fragment, "step_details_fragment");
+                        fragmentTransaction.commit();
+                        Log.i("StepListFragment", "adding StepDetailsFragment...");
+                    }
                 } else { // on phones (portrait mode), we simply launch the step details activity
                     Intent intent = new Intent(getActivity(), StepDetailsActivity.class);
                     startActivity(intent);
