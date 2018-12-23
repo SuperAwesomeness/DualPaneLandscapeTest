@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ddfshhh.dualpanelandscapetest.R;
-import com.example.ddfshhh.dualpanelandscapetest.RecipeStepsActivity;
 import com.example.ddfshhh.dualpanelandscapetest.StepDetailsActivity;
 
 
